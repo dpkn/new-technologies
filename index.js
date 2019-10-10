@@ -1,5 +1,5 @@
 let synth;
-let noteStack = [undefined,undefined,undefined,undefined];
+let noteStack = [[],[],[],[]];
 let loop;
 let drum;
 
@@ -14,14 +14,12 @@ AFRAME.registerComponent('collider-boy', {
     
     el.addEventListener('hitstart', function (e) {
       data.note = el.components['aabb-collider']['intersectedEls'][0]['components']['note-player']['data']['note'];
-      noteStack[data.id] = data.note;
-      AFRAME.log(data.note +' in')
-  //    synth.triggerAttack(data.note);
+      noteStack[data.id].push(data.note);
+      AFRAME.log(data.note +' put inside beat '+ data.id)
     })
     el.addEventListener('hitend', function () {
-      AFRAME.log(data.note+ ' UIT');
-     // synth.triggerRelease(data.note);
-      noteStack[data.id] = undefined;
+      AFRAME.log(data.note+ ' taken out of beat '+data.id);
+      noteStack[data.id] = noteStack[data.id].filter(item => item !== data.note);
     })
   }
 })
@@ -35,8 +33,10 @@ AFRAME.registerComponent('collider-boy', {
 
         loop = new Tone.Sequence(function (time, i){
 
-          if(noteStack[i]){
-            synth.triggerAttackRelease(noteStack[i],'16n',time);
+          if(noteStack[i].length > 0){
+            for(note of noteStack[i]){
+              synth.triggerAttackRelease(note,'16n',time);
+            }
           }
          
           //set the columne on the correct draw frame
@@ -47,9 +47,9 @@ AFRAME.registerComponent('collider-boy', {
         loop.start(0);
         loop.loop = true;
 
-        realLoop = new Tone.Loop(function(time){
-          drum.triggerAttackRelease('D2', "32n", time);
-        }, "16n").start(0);
+        // realLoop = new Tone.Loop(function(time){
+        //   drum.triggerAttackRelease('A2', "32n", time);
+        // }, "8n").start(0);
 
         Tone.Transport.start();
 
@@ -77,19 +77,19 @@ AFRAME.registerComponent('collider-boy', {
     init: function () {
       var el = this.el;
       var self = this;
-      el.addEventListener('hover-start', function () {
-     //  synth.triggerAttackRelease(self.data.note,'8n');
-      })
-      el.addEventListener('hover-end', function() {
+    //   el.addEventListener('hover-start', function () {
+    //  //  synth.triggerAttackRelease(self.data.note,'8n');
+    //   })
+    //   el.addEventListener('hover-end', function() {
 
-      })
-    el.addEventListener('collide', function () {
-        // if(e.detail.body.el.classList.contains('cube') && e.detail.target.el.classList.contains('cube')){
-        //     synth.triggerAttackRelease("C4","16n");
-        //     console.log(e);
-        // }
+    //   })
+    // el.addEventListener('collide', function () {
+    //     // if(e.detail.body.el.classList.contains('cube') && e.detail.target.el.classList.contains('cube')){
+    //     //     synth.triggerAttackRelease("C4","16n");
+    //     //     console.log(e);
+    //     // }
     
-      })
+    //   })
     }
   })
   

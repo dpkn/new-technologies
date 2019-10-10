@@ -21,7 +21,7 @@
             <a-mixin id="cube" geometry="primitive: box; width: 0.2; height: 0.2; depth: 0.2"
             hoverable grabbable draggable
             dynamic-body
-            event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+            event-set__hoveron="_event: hover-start; material.opacity: 0.6; transparent: true"
             event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
             collider
             ></a-mixin>
@@ -36,17 +36,12 @@
             colliderEndEventProperty: clearedEls;">
             </a-mixin>
 
-            <a-mixin id="noter">
-                <a-box static-body position="0 1.2 0" scale="0.4 0.1 0.4" color="white"></a-box>
-                <a-box collider-boy aabb-collider="objects: .cube" position="0 1.4 0" scale="0.4 0.4 0.4" visible="false"></a-box>            
-            </a-mixin>
-
         </a-assets>
        
-        <a-entity log geometry="primitive: plane" material="color: #111" text="color: lightgreen" position="0 1 -2"></a-entity>
+        <a-entity log geometry="primitive: plane" material="color: #111" text="color: lightgreen" position="2.35 1.387 -1.07" rotation="0 270 0"></a-entity>
 
         <a-entity>
-            <a-camera positon="0 1.6 0"></a-camera>
+            <a-camera positon="0 0 0" rotation="0 90 0"></a-camera>
 
             <a-entity id="rhand" mixin="touch"
             vive-controls="hand: right"
@@ -63,10 +58,20 @@
             <a-entity speaker-system></a-entity>
         </a-entity>
 
-        <a-entity log geometry="primitive: plane" material="color: #111" text="color: lightgreen" position="0 1 -2"></a-entity>
 
-        <a-entity note-player="note: C4" class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
-        <a-entity note-player="note: D4" class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
+        <!-- The table -->
+        <a-box static-body position="0.74843 0.8 -0.26166" scale="2 0.03 0.4" color="white"></a-box>
+        <a-box static-body position="1.54037 0.8 -1.46444" scale="2 0.03 0.4" rotation="0 90 0" color="white"></a-box>
+
+        
+        <a-entity note-player="note: C4" class="cube" mixin="cube" position="1.552 0.915 -2.309" material="color: red"></a-entity>
+        <a-entity note-player="note: F4" class="cube" mixin="cube" position="1.552 1.14 -2.309" material="color: red"></a-entity>
+        <a-entity note-player="note: G4" class="cube" mixin="cube" position="1.552 0.93 -2.03" material="color: red"></a-entity>
+       
+        <a-entity note-player="note: A4" class="cube" mixin="cube" position="1.552 0.90 -1.71" material="color: purple"></a-entity>
+        <a-entity note-player="note: C4" class="cube" mixin="cube" position="0 0.265 -1" material="color: purple"></a-entity>
+        <a-entity note-player="note: E4" class="cube" mixin="cube" position="0 0.265 -1" material="color: purple"></a-entity>
+
         <a-entity note-player="note: E4" class="cube" mixin="cube" position="-1 0.265 -1" material="color: blue"></a-entity>
         <a-entity note-player="note: F4" class="cube" mixin="cube" position="-1 0.265 -0.5" material="color: blue"></a-entity>
         <a-entity note-player="note: G4" class="cube" mixin="cube" position="1 0.265 -1" material="color: green"></a-entity>
@@ -75,20 +80,18 @@
         <!-- ground collider keeps objets from falling -->
         <a-box static-body width=100 height=0.001 depth=100 visible="false"></a-box>
 
-        <a-box static-body position="0 1.2 0" scale="0.3 0.1 0.3" color="white"></a-box>
-        <a-box collider-boy="id: 0" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;"" position="0 1.4 0" scale="0.3 0.3 0.3" visible="false"></a-box>
+        <!-- Beat Platforms -->
+        <a-box static-body position="0 1 0" scale="0.3 0.1 0.3" color="white"></a-box>
+        <a-box collider-boy="id: 0" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;"" position="0 1.55 0" scale="0.3 1 0.3" visible="false"></a-box>
 
-        <a-box static-body position="0.5 1.2 0" scale="0.3 0.1 0.3" color="white"></a-box>
-        <a-box collider-boy="id: 1" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="0.5 1.4 0" scale="0.3 0.3 0.3" visible="false"></a-box>
+        <a-box static-body position="0.5 1 0" scale="0.3 0.1 0.3" color="white"></a-box>
+        <a-box collider-boy="id: 1" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="0.5 1.55 0" scale="0.3 1 0.3" visible="false"></a-box>
 
-        <a-box static-body position="1 1.2 0" scale="0.3 0.1 0.3" color="white"></a-box>
-        <a-box collider-boy="id: 2" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="1 1.4 0" scale="0.3 0.3 0.3" visible="false"></a-box>
+        <a-box static-body position="1 1 0" scale="0.3 0.1 0.3" color="white"></a-box>
+        <a-box collider-boy="id: 2" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="1 1.55 0" scale="0.3 1 0.3" visible="false"></a-box>
 
-        <a-box static-body position="1.5 1.2 0" scale="0.3 0.1 0.3" color="white"></a-box>
-        <a-box collider-boy="id: 3" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="1 1.4 0" scale="0.3 0.3 0.3" visible="false"></a-box>
-
-
-        <a-entity class="noter" mixin="noter" position="1 1 1" material="color: green"></a-entity>
+        <a-box static-body position="1.5 1 0" scale="0.3 0.1 0.3" color="white"></a-box>
+        <a-box collider-boy="id: 3" aabb-collider="objects: .cube;collideNonVisible:true;debug:true;" position="1.5 1.55 0" scale="0.3 1 0.3" visible="false"></a-box>
 
     </a-scene>
 </body>
