@@ -70,7 +70,7 @@ AFRAME.registerComponent('collider-boy', {
   })
 
 
-  AFRAME.registerComponent('note-player', {
+  AFRAMEs.registerComponent('note-player', {
     schema:{
         note: {default:'C4'}
     },
